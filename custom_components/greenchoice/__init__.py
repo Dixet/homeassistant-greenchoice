@@ -3,8 +3,7 @@ from datetime import timedelta
 import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
 from homeassistant.components.sensor import (
-    DOMAIN as SENSOR_DOMAIN,
-    PLATFORM_SCHEMA
+    DOMAIN as SENSOR_DOMAIN
 )
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import CONF_USERNAME, CONF_PASSWORD, CONF_NAME, CONF_SCAN_INTERVAL
@@ -26,14 +25,6 @@ from .const import (
 from .greenchoice_api import GreenchoiceApi, GreenchoiceOvereenkomst, GreenchoiceError, GreenchoiceApiData
 
 PLATFORMS = (SENSOR_DOMAIN,)
-
-PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
-    vol.Optional(CONF_NAME, default=DEFAULT_NAME): cv.string,
-    vol.Optional(CONF_USERNAME, default=CONF_USERNAME): cv.string,
-    vol.Optional(CONF_PASSWORD, default=CONF_USERNAME): cv.string,
-    vol.Optional(CONF_OVEREENKOMST_ID, default=CONF_OVEREENKOMST_ID): cv.string,
-})
-
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up Greenchoice Sensor from a config entry."""
