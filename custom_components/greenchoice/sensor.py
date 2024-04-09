@@ -11,7 +11,7 @@ from homeassistant.components.sensor import (
     SensorEntityDescription,
 )
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import (ENERGY_KILO_WATT_HOUR, VOLUME_CUBIC_METERS, CURRENCY_EURO)
+from homeassistant.const import (UnitOfEnergy.KILO_WATT_HOUR, UnitOfVolume.CUBIC_METERS, CURRENCY_EURO)
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.device_registry import DeviceEntryType
 from homeassistant.helpers.entity import DeviceInfo
@@ -38,7 +38,7 @@ SENSORS_POWER: tuple[SensorEntityDescription, ...] = (
         key=MeasurementNames.ENERGY_HIGH_IN,
         name="Energie levering hoog tarief",
         icon="mdi:weather-sunset-up",
-        native_unit_of_measurement=ENERGY_KILO_WATT_HOUR,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         device_class=SensorDeviceClass.ENERGY,
         state_class=SensorStateClass.TOTAL_INCREASING,
     ),
@@ -46,7 +46,7 @@ SENSORS_POWER: tuple[SensorEntityDescription, ...] = (
         key=MeasurementNames.ENERGY_LOW_IN,
         name="Energie levering laag tarief",
         icon="mdi:weather-sunset-down",
-        native_unit_of_measurement=ENERGY_KILO_WATT_HOUR,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         device_class=SensorDeviceClass.ENERGY,
         state_class=SensorStateClass.TOTAL_INCREASING,
     ),
@@ -54,7 +54,7 @@ SENSORS_POWER: tuple[SensorEntityDescription, ...] = (
         key=MeasurementNames.ENERGY_TOTAL_IN,
         name="Energie levering totaal",
         icon="mdi:transmission-tower-export",
-        native_unit_of_measurement=ENERGY_KILO_WATT_HOUR,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         device_class=SensorDeviceClass.ENERGY,
         state_class=SensorStateClass.TOTAL_INCREASING,
     ),
@@ -62,7 +62,7 @@ SENSORS_POWER: tuple[SensorEntityDescription, ...] = (
         key=MeasurementNames.ENERGY_HIGH_OUT,
         name="Energie teruglevering hoog tarief",
         icon="mdi:solar-power",
-        native_unit_of_measurement=ENERGY_KILO_WATT_HOUR,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         device_class=SensorDeviceClass.ENERGY,
         state_class=SensorStateClass.TOTAL_INCREASING,
     ),
@@ -70,7 +70,7 @@ SENSORS_POWER: tuple[SensorEntityDescription, ...] = (
         key=MeasurementNames.ENERGY_LOW_OUT,
         name="Energie teruglevering laag tarief",
         icon="mdi:solar-power",
-        native_unit_of_measurement=ENERGY_KILO_WATT_HOUR,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         device_class=SensorDeviceClass.ENERGY,
         state_class=SensorStateClass.TOTAL_INCREASING,
     ),
@@ -78,7 +78,7 @@ SENSORS_POWER: tuple[SensorEntityDescription, ...] = (
         key=MeasurementNames.ENERGY_TOTAL_OUT,
         name="Energie teruglevering totaal",
         icon="mdi:transmission-tower-import",
-        native_unit_of_measurement=ENERGY_KILO_WATT_HOUR,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         device_class=SensorDeviceClass.ENERGY,
         state_class=SensorStateClass.TOTAL_INCREASING,
     ),
@@ -89,7 +89,7 @@ SENSORS_GAS: tuple[SensorEntityDescription, ...] = (
         key=MeasurementNames.GAS_IN,
         name="Gas consumptie",
         icon="mdi:gas-cylinder",
-        native_unit_of_measurement=VOLUME_CUBIC_METERS,
+        native_unit_of_measurement=UnitOfVolume.CUBIC_METERS,
         device_class=SensorDeviceClass.GAS,
         state_class=SensorStateClass.TOTAL_INCREASING,
     ),
@@ -102,7 +102,7 @@ SENSORS_TARIFFS_POWER: tuple[SensorEntityDescription, ...] = (
         icon="mdi:cash-plus",
         native_unit_of_measurement=PRICE_EUR_KWH,
         device_class=SensorDeviceClass.MONETARY,
-        state_class=SensorStateClass.MEASUREMENT,
+        state_class=SensorStateClass.TOTAL,
     ),
     SensorEntityDescription(
         key=MeasurementNames.PRICE_ENERGY_LOW_IN,
@@ -110,7 +110,7 @@ SENSORS_TARIFFS_POWER: tuple[SensorEntityDescription, ...] = (
         icon="mdi:cash-minus",
         native_unit_of_measurement=PRICE_EUR_KWH,
         device_class=SensorDeviceClass.MONETARY,
-        state_class=SensorStateClass.MEASUREMENT,
+        state_class=SensorStateClass.TOTAL,
     ),
     SensorEntityDescription(
         key=MeasurementNames.PRICE_ENERGY_HIGH_OUT,
@@ -118,7 +118,7 @@ SENSORS_TARIFFS_POWER: tuple[SensorEntityDescription, ...] = (
         icon="mdi:cash-sync",
         native_unit_of_measurement=PRICE_EUR_KWH,
         device_class=SensorDeviceClass.MONETARY,
-        state_class=SensorStateClass.MEASUREMENT,
+        state_class=SensorStateClass.TOTAL,
     ),
     SensorEntityDescription(
         key=MeasurementNames.PRICE_ENERGY_LOW_OUT,
@@ -126,7 +126,7 @@ SENSORS_TARIFFS_POWER: tuple[SensorEntityDescription, ...] = (
         icon="mdi:cash-sync",
         native_unit_of_measurement=PRICE_EUR_KWH,
         device_class=SensorDeviceClass.MONETARY,
-        state_class=SensorStateClass.MEASUREMENT,
+        state_class=SensorStateClass.TOTAL,
     ),
     SensorEntityDescription(
         key=MeasurementNames.PRICE_ENERGY_SELL_PRICE,
@@ -134,7 +134,7 @@ SENSORS_TARIFFS_POWER: tuple[SensorEntityDescription, ...] = (
         icon="mdi:cash-refund",
         native_unit_of_measurement=PRICE_EUR_KWH,
         device_class=SensorDeviceClass.MONETARY,
-        state_class=SensorStateClass.MEASUREMENT,
+        state_class=SensorStateClass.TOTAL,
     ),
     SensorEntityDescription(
         key=MeasurementNames.COST_ENERGY_YEARLY,
@@ -161,7 +161,7 @@ SENSORS_TARIFFS_GAS: tuple[SensorEntityDescription, ...] = (
         icon="mdi:gas-cylinder",
         native_unit_of_measurement=PRICE_EUR_M3,
         device_class=SensorDeviceClass.MONETARY,
-        state_class=SensorStateClass.MEASUREMENT,
+        state_class=SensorStateClass.TOTAL,
     ),
     SensorEntityDescription(
         key=MeasurementNames.COST_GAS_YEARLY,
